@@ -1139,6 +1139,7 @@ class Connection {
                 }
             );
         }
+        console.log({retval});
         switch (retval) {
             case constants.deny:
                 this.respond(550, msg || `${dmsg} denied`, () => {

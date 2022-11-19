@@ -15,7 +15,7 @@ const LOGIN_STRING2 = 'UGFzc3dvcmQ6'; //Password: base64 coded
 
 exports.hook_capabilities = (next, connection) => {
     // Don't offer AUTH capabilities unless session is encrypted
-    if (!connection.tls.enabled) { return next(); }
+    // if (!connection.tls.enabled) { return next(); }
 
     const methods = [ 'PLAIN', 'LOGIN', 'CRAM-MD5' ];
     connection.capabilities.push(`AUTH ${methods.join(' ')}`);
@@ -102,6 +102,7 @@ exports.check_user = function (next, connection, credentials, method) {
     // valid: (true|false)
     // opts: ({ message, code }|String)
     function passwd_ok (valid, opts) {
+        connection.logdebug("uh... passwd_ok");
         const status_code = (typeof(opts) === 'object' && opts.code) || (valid ? 235 : 535);
         const status_message = (typeof(opts) === 'object' ? opts.message : opts) ||
                 (valid  ? '2.7.0 Authentication successful' : '5.7.8 Authentication failed');
@@ -126,7 +127,7 @@ exports.check_user = function (next, connection, credentials, method) {
             });
             return;
         }
-
+        connection.logdebug("Authentication failed...");
         if (!connection.notes.auth_fails) {
             connection.notes.auth_fails = 0;
         }
