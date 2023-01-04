@@ -1,6 +1,6 @@
 {
   "author": "Matt Sergeant <helpme@gmail.com> (http://baudehlo.com/)",
-  "name": "Haraka",
+  "name": "bizi-haraka",
   "license": "MIT",
   "description": "An SMTP Server project.",
   "keywords": [
@@ -51,6 +51,7 @@
     "npid": "~0.4.0",
     "object-merge": "^2.5.1",
     "openssl-wrapper": "^0.3.4",
+    "selfsigned": "^2.1.1",
     "semver": "~7.3.5",
     "sockaddr": "^1.0.1",
     "sprintf-js": "~1.1.2"
@@ -99,6 +100,8 @@
     "haraka_grep": "./bin/haraka_grep"
   },
   "scripts": {
+    "haraka-w-tls": "node init_tls ; node haraka",
+    "artifactregistry-login": "npx google-artifactregistry-auth",
     "test": "node run_tests",
     "lint": "npx eslint *.js outbound plugins plugins/*/*.js tests tests/*/*.js tests/*/*/*.js bin/haraka bin/spf bin/dkimverify",
     "lintfix": "npx eslint --fix *.js outbound plugins plugins/*/*.js tests tests/*/*.js tests/*/*/*.js bin/haraka bin/spf bin/dkimverify",
