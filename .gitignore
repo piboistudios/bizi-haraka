@@ -13,3 +13,6 @@ tests/queue/multibyte
 tests/test-queue
 package-lock.json
 .release
+config/mongoose*
+**/*.env
+**/*.pem

@@ -25,6 +25,7 @@
     "async": "^3.2.3",
     "bluebird": "^3.7.2",
     "daemon": "~1.1.0",
+    "dotenv": "^16.0.3",
     "generic-pool": "~3.9.0",
     "handlebars": "^4.7.7",
     "haraka-config": "^1.0.20",
@@ -100,7 +101,7 @@
     "haraka_grep": "./bin/haraka_grep"
   },
   "scripts": {
-    "haraka-w-tls": "node init_tls ; node haraka",
+    "haraka-w-tls": "node config_env ; node init_tls ; node haraka",
     "artifactregistry-login": "npx google-artifactregistry-auth",
     "test": "node run_tests",
     "lint": "npx eslint *.js outbound plugins plugins/*/*.js tests tests/*/*.js tests/*/*/*.js bin/haraka bin/spf bin/dkimverify",

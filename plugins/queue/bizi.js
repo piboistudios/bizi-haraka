@@ -23,7 +23,10 @@ exports.init_mongoose = function () {
     const dsn = dsnFn(options);
     const dsnRedacted = dsnFn({ ...options, pass: "(REDACTED)" });
     plugin.loginfo(`Connecting to ${dsnRedacted}`);
-    mongoose.connect(dsn, { ssl: true, sslValidate: false })
+    logger.info("Mongo DSN:", dsn);
+    const connectOpts = { ssl: Boolean(config.ssl), sslValidate: Boolean(config.sslValidate), authSource: config.authSource }/* , { ssl: true, sslValidate: false } */
+    logger.info("Mongo connectOpts:", connectOpts);
+    mongoose.connect(dsn, connectOpts)
         .then(cnx => {
             mCnx = cnx;
             plugin.loginfo(`Connected to ${dsnRedacted}`);
