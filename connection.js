@@ -1345,7 +1345,7 @@ class Connection {
             return this.respond(503, 'Use EHLO/HELO before MAIL');
         }
         // Require authentication on connections to port 587 & 465
-        if (!this.relaying && [587].includes(this.local.port)) {
+        if (!this.relaying && [587,465].includes(this.local.port)) {
             this.errors++;
             return this.respond(550, 'Authentication required');
         }
