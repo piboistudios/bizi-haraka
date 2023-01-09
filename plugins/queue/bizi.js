@@ -53,8 +53,9 @@ exports.hook_queue = async function (next, connection) {
     connectionData.results = undefined;
     connectionData.transaction = connectionData.transasction || {};
     connectionData.transaction.message_stream = undefined;
+    const msgId = connectionData.header.headers["message-id"][0].trim();
     const existingMessage = await MailMessage.findOne({
-        "data.header.headers.message-id": connectionData.header.headers["message-id"][0].trim()
+        "data.header.headers.message-id": msgId
     });
     const newData = {
         diagnostics: connection?.transaction?.results?.store,
@@ -67,7 +68,7 @@ exports.hook_queue = async function (next, connection) {
     if (!existingMessage) {
 
         const rawMsg = await promisify(RawEmail.write, { context: RawEmail })({
-            filename: `${connection.transaction.uuid}.eml`,
+            filename: `${msgId}.eml`,
             contentType: 'application/octet-stream',
             metadata: {
                 mailMessageId: mailMessage._id
@@ -127,10 +128,11 @@ exports.hook_queue_outbound = async function (next, connection) {
     const connectionData = { ...connection.transaction };
     connectionData.results = undefined;
     connectionData.message_stream = undefined;
+    const msgId = connectionData.header.headers["message-id"][0].trim();
     plugin.lognotice("Creating mail message");
-    plugin.loginfo("connection msg id..." + connectionData.header.headers["message-id"][0].trim())
+    plugin.loginfo("connection msg id..." + msgId)
     let existingMessage = await MailMessage.findOne({
-        "data.header.headers.message-id": connectionData.header.headers["message-id"][0].trim()
+        "data.header.headers.message-id": msgId
     });
     const newData = {
         diagnostics: connection.transaction.results.store,
@@ -144,7 +146,7 @@ exports.hook_queue_outbound = async function (next, connection) {
 
         plugin.lognotice("Writing raw email", `${connection.transaction.uuid}.eml`);
         const rawMsg = await promisify(RawEmail.write, { context: RawEmail })({
-            filename: `${connection.transaction.uuid}.eml`,
+            filename: `${msgId}.eml`,
             contentType: 'application/octet-stream',
             metadata: {
                 mailMessageId: mailMessage._id
