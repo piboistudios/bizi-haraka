@@ -4,14 +4,17 @@ const nodemailer = require('nodemailer');
     
 // });
 const transport = nodemailer.createTransport({
-    host: "localhost",
+    host: "smtp.gabedev.email",
     port: 25,
-    secure: false,
     logger:true,
-    authMethod: "login",
-    auth: {
-        user: "topboy",
-        pass: "CmZeuEUQbf3IpX",
+    // authMethod: "login",
+    // auth: {
+    //     user: "topboy",
+    //     pass: "CmZeuEUQbf3IpX",
+    // },
+    tls: {
+        rejectUnauthorized: false,
+        servername: 'smtp.gabedev.email'
     }
 });
 async function main() {
@@ -22,7 +25,7 @@ async function main() {
         text: "Webmasta", // plain text body
         html: "<b>Webmaster 😎</b>", // html body
       };
-    await transport.verify();
+    // await transport.verify();
     console.log("auth works...");
 
     await transport.sendMail(msg);
