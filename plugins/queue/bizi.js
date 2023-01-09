@@ -3,10 +3,11 @@ const util = require('util');
 const mongoose = require('mongoose');
 const objMerge = require('object-merge');
 const handlebars = require('handlebars');
-const { logger } = require('../../server');
 const { promisify } = require('bluebird');
+let logger;
 let mCnx;
 exports.register = function () {
+    logger = this;
     logger.logdebug("About to connect and initialize queue object");
     this.init_mongoose();
     logger.logdebug(`Finished initiating`);
