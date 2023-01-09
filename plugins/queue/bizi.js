@@ -48,9 +48,9 @@ exports.hook_queue = async function (next, connection) {
     const Mailbox = require('./models/mailbox');
     /**@type {import('../../models/raw-email')} */
     const RawEmail = require('../../models/raw-email');
-    plugin.logdebug("connection:", connection);
+    plugin.logdebug("connection: " + util.inspect(connection,null, 5));
     const connectionData = { ...connection.transaction };
-    plugin.logdebug("connection:", connectionData);
+    plugin.logdebug("connection:", util.inspect(connectionData));
     connectionData.results = undefined;
     connectionData.transaction = connectionData.transasction || {};
     connectionData.transaction.message_stream = undefined;
@@ -103,7 +103,7 @@ exports.hook_queue = async function (next, connection) {
             plugin.logerror("Unable to deliver mail to " + r + " :" + e);
         }
     }));
-    next();
+    next(OK);
     // const ws = fs.createWriteStream(`${tempDir}/mail.eml`);
     // fs.writeFileSync(`${tempDir}/tx.json`, JSON.stringify(connection.transaction, null, 4));
     // connection.logdebug(this, `Saving to ${tempDir}/mail.eml`);
@@ -182,5 +182,5 @@ exports.hook_queue_outbound = async function (next, connection) {
         plugin.logerror("Unable to deliver mail to " + r + " :" + e);
     }
 
-    next();
+    next(OK);
 }
