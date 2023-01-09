@@ -4,9 +4,11 @@ const nodemailer = require('nodemailer');
     
 // });
 const transport = nodemailer.createTransport({
-    host: "localhost",
-    port: 25,
+    host: "provider.palmito.duckdns.org",
+    port: 32020,
     logger:true,
+    debug:true,
+    secure:true,
     // authMethod: "login",
     // auth: {
     //     user: "topboy",
