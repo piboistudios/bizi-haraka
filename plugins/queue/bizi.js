@@ -50,6 +50,7 @@ exports.hook_queue = async function (next, connection) {
 
     const connectionData = { ...connection.transaction };
     connectionData.results = undefined;
+    connectionData.transaction = connectionData.transasction || {};
     connectionData.transaction.message_stream = undefined;
     const existingMessage = await MailMessage.findOne({
         "data.header.headers.message-id": connectionData.header.headers["message-id"][0].trim()
