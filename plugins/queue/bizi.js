@@ -49,6 +49,7 @@ exports.hook_queue = async function (next, connection) {
     const RawEmail = require('../../models/raw-email');
     plugin.logdebug("connection:", connection);
     const connectionData = { ...connection.transaction };
+    plugin.logdebug("connection:", connectionData);
     connectionData.results = undefined;
     connectionData.transaction = connectionData.transasction || {};
     connectionData.transaction.message_stream = undefined;
