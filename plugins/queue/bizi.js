@@ -47,7 +47,7 @@ exports.hook_queue = async function (next, connection) {
     const Mailbox = require('./models/mailbox');
     /**@type {import('../../models/raw-email')} */
     const RawEmail = require('../../models/raw-email');
-
+    plugin.logdebug("connection:", connection);
     const connectionData = { ...connection.transaction };
     connectionData.results = undefined;
     connectionData.transaction = connectionData.transasction || {};
@@ -56,7 +56,7 @@ exports.hook_queue = async function (next, connection) {
         "data.header.headers.message-id": connectionData.header.headers["message-id"][0].trim()
     });
     const newData = {
-        diagnostics: connection.transaction.results.store,
+        diagnostics: connection?.transaction?.results?.store,
         data: connectionData
     };
     if (existingMessage) {
