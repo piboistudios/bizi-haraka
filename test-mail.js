@@ -4,7 +4,7 @@ const nodemailer = require('nodemailer');
     
 // });
 const transport = nodemailer.createTransport({
-    host: "smtp.gabedev.email",
+    host: "localhost",
     port: 25,
     logger:true,
     // authMethod: "login",
