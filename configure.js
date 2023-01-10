@@ -74,6 +74,14 @@ function traverse(dir, root) {
     });
 }
 traverse(inDir, true);
-if(argv.start) {
-    require('./haraka');
+if (argv.start) {
+    require('./init_tls')()
+        .then(() => {
+
+            require('./haraka');
+        })
+        .catch(e => {
+            debug("Error:", e);
+            process.exit(1);
+        })
 }

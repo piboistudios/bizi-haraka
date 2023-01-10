@@ -14,4 +14,4 @@ async function main() {
         fs.writeFileSync('config/' + file + '.pem', contents);
     });
 }
-main()
+module.exports = main;
