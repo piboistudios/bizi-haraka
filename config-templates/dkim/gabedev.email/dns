@@ -1,0 +1,32 @@
+
+Add this TXT record to the gabedev.email DNS zone.
+
+jan2023._domainkey    IN   TXT   v=DKIM1;p=MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAvF3Da1W5oFWMB3Ox2N5LN2/KB1kQrBNyRteTyLupA7AWiIxOScLr0dM72Zo3FkDAhwYghV9KZqCT8zj38VzEGGENEHchg/LqXoGlkYIQQyhYlkbDeN7L+MS994Ulj+oGyFG6SEmV8sSx0ntqVZDasYnUIQ6miXej7VO0jiw8h1Xq1un33zoYKIQzHpgEefPJotjouwjDE2FSdFYxkU3RQ4YMkYidQQX8lSp18PKaD25lCHUaas3i9WDtpRypcQCaNTyA3dAubYf9HRadzUg6Wp/ukfLDAF4Hjt2op5nRDJtqwW0/FApvJk4JeqMzsBmSZf688omxJf2wSlrpmTnVWQIDAQAB
+
+
+BIND zone file formatted:
+
+jan2023._domainkey    IN   TXT (
+	"v=DKIM1;p=MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAvF3Da1W5oFWMB3Ox2N5LN2/KB1kQrBNyRteTyLupA7AWiIxOScLr0dM7"
+	"2Zo3FkDAhwYghV9KZqCT8zj38VzEGGENEHchg/LqXoGlkYIQQyhYlkbDeN7L+MS994Ulj+oGyFG6SEmV8sSx0ntqVZDasYnUIQ6miXej7VO0ji"
+	"w8h1Xq1un33zoYKIQzHpgEefPJotjouwjDE2FSdFYxkU3RQ4YMkYidQQX8lSp18PKaD25lCHUaas3i9WDtpRypcQCaNTyA3dAubYf9HRadzUg6"
+	"Wp/ukfLDAF4Hjt2op5nRDJtqwW0/FApvJk4JeqMzsBmSZf688omxJf2wSlrpmTnVWQIDAQAB"
+        )
+
+Tell the world that the ONLY mail servers that send mail from this domain are DKIM signed and/or bear our MX and A records.
+
+With SPF:
+
+        SPF "v=spf1 mx a -all"
+        TXT "v=spf1 mx a -all"
+
+With DMARC:
+
+_dmarc  TXT "v=DMARC1; p=reject; adkim=s; aspf=r; rua=mailto:dmarc-feedback@gabedev.email; ruf=mailto:dmarc-feedback@gabedev.email; pct=100"
+
+For more information about DKIM and SPF policy,
+the documentation within each plugin contains a longer discussion and links to more detailed information:
+
+   haraka -h dkim_sign
+   haraka -h spf
+

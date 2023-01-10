@@ -25,6 +25,7 @@
     "async": "^3.2.3",
     "bluebird": "^3.7.2",
     "daemon": "~1.1.0",
+    "debug": "github:calvintwr/debug",
     "dotenv": "^16.0.3",
     "generic-pool": "~3.9.0",
     "handlebars": "^4.7.7",
@@ -55,7 +56,8 @@
     "selfsigned": "^2.1.1",
     "semver": "~7.3.5",
     "sockaddr": "^1.0.1",
-    "sprintf-js": "~1.1.2"
+    "sprintf-js": "~1.1.2",
+    "yargs": "^17.6.2"
   },
   "optionalDependencies": {
     "haraka-plugin-access": "^1.1.4",
