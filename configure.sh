@@ -15,4 +15,3 @@ configure \
 --ldap-bind-pass=CmZeuEUQbf3IpX \
 --domain='{"name":"gabedev.email","ldap": {"server":"ldap://bizi-ldap:389","binddn":"uid=admin,ou=users,dc=gabedev,dc=directory","bindpw":"CmZeuEUQbf3IpX","basedn":"ou=users,dc=gabedev,dc=directory"}}' \
 --domain='{"name":"gabedev.tech","ldap": {"server":"ldap://bizi-ldap:389","binddn":"uid=admin,ou=users,dc=gabedev,dc=directory","bindpw":"CmZeuEUQbf3IpX","basedn":"ou=users,dc=gabedev,dc=directory"}}' \
---start=1

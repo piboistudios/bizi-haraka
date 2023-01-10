@@ -18,3 +18,4 @@ package-lock.json
 **/*.log
 **/*.err
 backup_config/**
+config/**
